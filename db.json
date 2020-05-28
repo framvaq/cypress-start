@@ -2,13 +2,13 @@
   "todos": [
     {
       "text": "Hello world",
-      "completed": false,
-      "id": 3
+      "id": 3,
+      "completed": false
     },
     {
       "id": 4,
-      "completed": true,
-      "text": "Goodnight moon"
+      "text": "Goodnight moon",
+      "completed": true
     }
   ]
 }
