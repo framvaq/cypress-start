@@ -23,3 +23,27 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('store', (str='') => {
+  let log = Cypress.log({ name: 'store' });
+
+  const cb = (state) => {
+    log.set({
+        message: JSON.stringify(state),
+        consoleProps: () => {
+            return state
+        }
+    }).snapshot().end()
+
+    return state
+}
+
+return cy.window({log: false}).then(function($w) { return $w.store.getState() }).then((state) => {
+    if (str.length > 0) {
+        return cy.wrap(state, {log: false}).its(str).then(cb)
+    } else {
+        return cy.wrap(state, {log: false}).then(cb)
+    }
+    
+})
+});
